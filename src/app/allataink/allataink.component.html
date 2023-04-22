@@ -1,0 +1,31 @@
+<div class="container">
+
+    <div class="row my-3">
+        <div *ngFor="let oszlop of oszlopok" class="col">
+            {{oszlop}}
+        </div>
+    </div>
+
+    <ng-container *ngIf="allatok">
+        <div  *ngFor="let allat of allatok | sortABC:'gondozo'" class="row my-1">
+            <div *ngFor="let oszlop of oszlopok" class="col">
+                {{allat[oszlop]}}
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="showError">
+        <div class="card alert alert-danger" role="alert">
+            <div class="card-body" >
+              <h5 class="card-title">Hiba történt</h5>            
+              <p class="card-text">{{errorMessage}}</p>
+              <a (click)="refresh()" href="#" class="btn btn-outline-danger">Újratöltés</a>
+            </div>
+          </div>
+    </ng-container>
+
+    <ng-container *ngIf="!showError && !allatok">
+        <h2 class="display-2">Töltődik ...</h2>
+    </ng-container>
+
+</div>

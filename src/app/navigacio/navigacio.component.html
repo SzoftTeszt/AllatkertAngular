@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mx-4">
+    <a class="navbar-brand" [routerLink]="['/home']">Állatkert</a>
+    <button (click)="becsukva= !becsukva" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div [ngbCollapse]="becsukva" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      
+        <li class="nav-item">
+            <a class="nav-link"
+            [routerLink]="['/home']"
+            routerLinkActive="kivalasztva"
+            [routerLinkActiveOptions]="{exact:true}">
+            Bemutatkozás
+            </a>
+        </li>
+       
+        <li class="nav-item">
+            <a class="nav-link"
+            [routerLink]="['/allataink']"
+            routerLinkActive="kivalasztva"
+            [routerLinkActiveOptions]="{exact:true}">
+            Állataink
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+            [routerLink]="['/ujallat']"
+            routerLinkActive="kivalasztva"
+            [routerLinkActiveOptions]="{exact:true}">
+            Új lakó felvétele
+            </a>
+        </li>
+       
+     
+      </ul>
+     
+    </div>
+  </nav>

@@ -1,0 +1,74 @@
+<!-- {{ujAllatForm.value|json}} -->
+<div class="card" >
+    <div class="card-body">
+      <h5 class="card-title">Regisztrálás</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Új állatka regisztrálása</h6>
+      
+      <form [formGroup]="ujAllatForm" (ngSubmit)="addAnimal(ujAllatForm.value)">
+        
+        <div class="form-group">
+          <label for="nev">Név:</label>
+          <input formControlName="nev" type="text" class="form-control" id="nev" >
+        </div>
+        <div class="form-group">
+          <label for="faj">Faja az állatnak:</label>
+          <input formControlName="faj" type="text" class="form-control" id="faj" >
+        </div>
+
+        <div class="form-group">
+          <label for="erkezes">Érkezés dátuma:</label>
+          <input formControlName="erkezes" type="date" class="form-control" id="erkezes" >
+        </div>
+
+        <div class="form-group">
+          <label for="helye">Helye az állatkertben:</label>
+          <input formControlName="helye" type="text" class="form-control" id="helye" >
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="gondozo">Gondozója:</label>
+          <input formControlName="gondozo" type="text" class="form-control" id="gondozo" >
+        </div> -->
+        <ng-container *ngIf="showErrorGondozo">
+            <div class="card alert alert-danger" role="alert">
+                <div class="card-body" >
+                  <h5 class="card-title">Hiba történt</h5>            
+                  <p class="card-text">{{errorMessageGondozo}}</p>         
+                </div>
+              </div>
+        </ng-container>
+
+        <div *ngIf="gondozok" class="form-group">
+          <label for="gondozo">Gondozója</label>
+          <select formControlName="gondozo"  class="form-control" id="gondozo">
+            <option value="unset">Kérem válasszon</option>            
+            <option 
+                *ngFor="let gondozo of gondozok" 
+                [ngValue]="gondozo.nev">
+                {{gondozo.nev}}
+            </option> 
+          </select>
+        </div>
+
+        <ng-container *ngIf="!showErrorGondozo && !gondozok">
+            <h2 class="display-5">Töltődik ...</h2>
+        </ng-container>
+
+        
+
+        <div class="form-group text-center">
+            <button type="submit" [disabled]="ujAllatForm.invalid" class="btn btn-primary">Felvétel</button>
+        </div>
+    </form>
+
+
+    </div>
+  </div>
+  <ng-container *ngIf="showError">
+    <div class="card alert alert-danger" role="alert">
+        <div class="card-body" >
+          <h5 class="card-title">Hiba történt</h5>            
+          <p class="card-text">{{errorMessage}}</p>         
+        </div>
+      </div>
+</ng-container>
